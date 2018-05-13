@@ -1,0 +1,71 @@
+<div class="container-fluid container1">
+  <h1 class="text-center">Vote-It-Easy</h1>
+  <h3 class="text-center" ng-hide="dataLoaded">Now loading...</h3>
+  <div ng-show="dataLoaded">
+    <p class="des" ng-show="showMyPollsOnly">Below are polls you own.</p>
+    <p class="des" ng-hide="showMyPollsOnly">Below are polls hosted by Vote-It-Easy.</p>
+    <p class="des">Select a poll to see the results and vote
+      <span ng-hide="userId">, or
+        <span id="signIn">sign-in</span> to make a new poll.</span>
+      <a href="/newpoll" ng-show="userId" id="mnp">, or make a new poll!</a>
+    </p>
+    <div class="row">
+      <div id="searchArea" class="col-sm-3">
+        <input class="form-control" type="text" ng-model="search" placeholder="Search a poll name here..." />
+      </div>
+    </div>
+    <hr>
+    <!--  
+        <ul class="list-group">
+            <a class="list-group-item" ng-href="/polls/{{poll._id}}" ng-repeat="poll in polls | filter: (showMyPollsOnly) && {owner:userId} || ''">{{poll.title}}</a>
+        </ul>
+        -->
+    <div id="outer">
+      <table id="myTable">
+        <thead>
+          <tr>
+            <th width="70%">
+              <button class="sortbtn" ng-click="sortBy('title')">Poll Name</button>
+              <span class="sortorder" ng-show="propertyName === 'title'" ng-class="{reverse: reverse}"></span>
+            </th>
+            <th width="10%">
+              <button class="sortbtn" ng-click="sortBy('date')">Date</button>
+              <span class="sortorder" ng-show="propertyName === 'date'" ng-class="{reverse: reverse}"></span>
+            </th>
+            <th width="10%">
+              <button class="sortbtn" ng-click="sortBy('tVotes')">Votes</button>
+              <span class="sortorder" ng-show="propertyName === 'tVotes'" ng-class="{reverse: reverse}"></span>
+            </th>
+
+            <th width="10%">
+              <button class="sortbtn" ng-click="sortBySt(reverse)">Status</button>
+              <span class="sortorder" ng-show="propertyName === 'voteSt'" ng-class="{reverse: reverse}"></span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-show="propertyName !== 'voteSt'" ng-repeat="poll in polls | orderBy:propertyName:reverse | filter: {title : search} |filter: (showMyPollsOnly) && {owner:userId} || ''">
+            <td width="70%">
+              <a href="/polls/{{poll._id}}" class="nav-link">{{poll.title}}</a>
+            </td>
+            <td width="10%">{{poll.date}}</td>
+            <td width="10%">{{poll.tVotes}}</td>
+            <td width="10%">
+              <span ng-if="poll.votedBy.indexOf(userId) != -1 || poll.votedBy.indexOf(clientIp) != -1">Voted</span>
+            </td>
+          </tr>
+          <tr ng-hide="propertyName !== 'voteSt'" ng-repeat="poll in polls | filter: {title : search} |filter: (showMyPollsOnly) && {owner:userId} || ''">
+            <td width="70%">
+              <a href="/polls/{{poll._id}}" class="nav-link">{{poll.title}}</a>
+            </td>
+            <td width="10%">{{poll.date}}</td>
+            <td width="10%">{{poll.tVotes}}</td>
+            <td width="10%">
+              <span ng-if="poll.votedBy.indexOf(userId) != -1 || poll.votedBy.indexOf(clientIp) != -1">Voted</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

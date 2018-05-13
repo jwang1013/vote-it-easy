@@ -1,0 +1,43 @@
+<div class="jumbotron">
+    <p ng-hide="dataLoaded">Now loading /polls/{{statePollId}}...</p>
+    <div class="row" ng-show="dataLoaded">
+        <div class="col-sm-4">
+            <p>{{pollTitle}}</p>
+            <form ng-submit="submitVote()">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="votefor">I'd like to vote for...: </label>
+                                <select id="votefor" class="form-control" ng-model="votefor">
+                                    <option value="" disabled selected hidden>Choose an option...: </option>
+                                    <option ng-repeat="option in chartLabels" ng-value="option">{{option}}</option>
+                                    <option ng-show="userId" value="===custom-option" >I'd like a custom option</option>
+                                </select>
+                                <div class="form-group" ng-show="votefor === '===custom-option'"><label for="custom-option">Vote with my own option: </label><input id="custom-option" type="text" ng-model="voteforCustom" ng-trim="true"></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <input class="btn btn-primary btn-block" type="submit" value="Submit">
+                        </div>
+                        
+                    </div>
+                </div>                
+            </form>
+            <div class="row">
+                <div class="col-xs-12">
+                    <blaze-template name="shareitEnh"></blaze-template>
+                </div>
+            </div>
+            <div class="row" id="del">
+            <div class="col-xs-12">
+                    <button class="btn btn-block btn-danger" ng-click="removePoll()" ng-show="isPollOwner">Remove this Poll</button>
+                </div> 
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <canvas class="chart chart-doughnut" chart-data="chartData" chart-labels="chartLabels" chart-legend="true"></canvas> 
+                  
+        </div>
+    </div>
+</div>

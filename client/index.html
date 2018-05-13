@@ -1,0 +1,38 @@
+<head>
+    <base href="/">
+    <title>Vote-It-Easy</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+</head>
+<body class="container">
+    <div id="div-main" ng-app="Vote-It-Easy" ng-controller="indexCtrl" ng-strict-di>
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-items">
+                        <span class="icon-bar" ></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/polls" class="navbar-brand" style="color: white">Vote-It-Easy</a>
+                </div>
+                <div class="collapse navbar-collapse" id="nav-items">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li  ui-sref-active="active" ><a ui-sref="pollsList" style="background-color: #5C6BC0; color:white; font-weight:200">Home</a></li>
+                        <li  ng-show="userId" ui-sref-active="active" ><a ui-sref="myPolls" style="background-color: #5C6BC0; color:white; font-weight:200">My Polls</a></li>
+                        <li  ng-show="userId" ui-sref-active="active" ><a ui-sref="newPoll" style="background-color: #5C6BC0; color:white; font-weight:200">New Poll</a></li>
+                        <li class="nav navbar-nav">{{> loginButtons}}</li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main>
+
+            <div ui-view></div>
+        </main>
+        <footer>
+            <span>This "Vote-It-Easy" app is built by <a href="www.gojunwang.com">@Jun Wang</a></span>
+            <br>
+            <span>Github repository: <a href="https://github.com/jwang1013/vote-it-easy">Vote-It-Easy</a></span>
+        </footer>
+    </div>    
+</body>

@@ -1,0 +1,1 @@
+angular.module("Vote-It-Easy", ["angular-meteor", "ui.router", "chart.js"]);
